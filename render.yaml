@@ -1,0 +1,17 @@
+# Render blueprint for the QuestClash server.
+# Use it when this folder is the root of its own Git repository: in Render, choose
+# New → Blueprint and pick the repository. (Or create a Web Service by hand with the
+# same build and start commands; see README.md.)
+services:
+  - type: web
+    name: questclash-server
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    # Colyseus answers 200 on "/"; Render uses this to know a deploy is up.
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # PORT is set by Render automatically; the server reads it.
