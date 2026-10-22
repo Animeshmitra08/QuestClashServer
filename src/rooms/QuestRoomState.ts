@@ -19,6 +19,8 @@ export const PlayerInfo = schema(
     z: t.number().default(0),
     facing: t.number().default(0),
     moveAmount: t.number().default(0),
+    /** Round trip in ms, as reported by the player's client; 0 = not measured yet. */
+    ping: t.number().default(0),
   },
   "PlayerInfo",
 );

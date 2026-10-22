@@ -11,7 +11,7 @@ import type {
 import { crate, outerWalls, pillar, WALL_THICKNESS, wallWithGap } from "./builders";
 
 /**
- * Stable ids for everything the rules, objectives or tests refer to. Change an
+ * Stable ids for everything the rules or objectives refer to. Change an
  * id here and every reference follows; validateLevel catches anything left dangling.
  */
 export const TEMPLE_IDS = {

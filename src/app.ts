@@ -5,7 +5,7 @@ import { ROOM_NAME } from "@/net/protocol";
 import { QuestRoom } from "./rooms/QuestRoom.ts";
 
 /**
- * The server definition, shared by the entry point (index.ts) and the tests.
+ * The server definition, started by the entry point (index.ts).
  * Rooms are created with `client.create(ROOM_NAME, …)` and joined by code with
  * `client.joinById(code, …)`.
  */

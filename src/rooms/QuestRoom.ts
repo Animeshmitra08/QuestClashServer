@@ -26,7 +26,7 @@ import type { LevelDefinition, Vec2 } from "@/types/game";
 import type { GameEvent, PlayerId } from "@/types/state";
 
 import { MovementGuard } from "../match/MovementGuard.ts";
-import { parseClientCommand, parseMove } from "./messageValidation.ts";
+import { parseClientCommand, parseMove, parsePing } from "./messageValidation.ts";
 import { claimRoomCode, releaseRoomCode } from "./roomCodes.ts";
 import { PlayerInfo, QuestRoomState } from "./QuestRoomState.ts";
 
@@ -132,6 +132,12 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
       const next = this.level.nextLevelId ? findLevel(this.level.nextLevelId) : null;
       if (!next) return this.refuse(client, "invalidLevel");
       this.startMatch(next);
+    },
+
+    reportPing: (client: Client, message: ClientMessages["reportPing"]) => {
+      const ms = parsePing(message);
+      const player = this.state.players.get(client.sessionId);
+      if (ms !== null && player) player.ping = ms; // only patched to clients when it changes
     },
   };
 

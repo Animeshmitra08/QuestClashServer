@@ -65,31 +65,23 @@ If this folder stays inside the app's repository, create the service by hand and
 
 **Free plan:** the service sleeps after about 15 minutes without traffic. The first connection after that takes up to a minute while it wakes, and open matches end when it sleeps. A paid instance stays on.
 
-## Test
+## Check
 
 ```bash
 npm run typecheck
-npm test                          # end-to-end: real server + separate protocol clients
-npm run build && npm run smoke    # built server as its own process + two client processes
 ```
-
-The tests and scripts use their own small client (`test/support/TestClient.ts`) built on `@colyseus/sdk`, so they don't need the app.
 
 ## Files
 
 ```
 src/index.ts                    entry point (PORT / HOST)
-src/app.ts                      server definition (shared by index.ts and the tests)
+src/app.ts                      server definition
 src/rooms/QuestRoom.ts          the room: lobby, codes, ready, matches, commands, reconnection
 src/rooms/QuestRoomState.ts     synced state (players' bodies, lobby); checked against the protocol at compile time
 src/rooms/messageValidation.ts  checks every client message before it is used
 src/rooms/roomCodes.ts          unique short room codes
 src/match/MovementGuard.ts      checks reported positions (speed, walls)
 src/shared/                     game rules, levels, types, protocol (this project's copy)
-test/multiplayer.test.ts        end-to-end tests
-test/support/TestClient.ts      minimal protocol client for tests and scripts
-scripts/client-bot.ts           a scripted player, for testing with separate processes
-scripts/two-client-smoke.mjs    runs the built server + two bots and checks what they saw
 render.yaml                     Render blueprint
 ```
 

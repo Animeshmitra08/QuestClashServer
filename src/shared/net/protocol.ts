@@ -1,5 +1,5 @@
 /**
- * The client–server protocol. The Expo app and the Colyseus server (server/) each
+ * The client–server protocol. The Expo app and the Colyseus server (QuestClashServer) each
  * keep an identical copy of this file. Plain types and constants only: no React
  * Native, no Colyseus imports, so it compiles on both sides.
  *
@@ -20,7 +20,7 @@ import type { GameEvent, MatchState, PlayerId } from "@/types/state";
  * messages, rules or levels change in a way the other side must match; a client
  * with a different number is refused with a clear "update" message.
  */
-export const PROTOCOL_VERSION = 1;
+export const PROTOCOL_VERSION = 2;
 
 /** The Colyseus room type name. */
 export const ROOM_NAME = "quest";
@@ -33,6 +33,11 @@ export const MAX_NAME_LENGTH = 16;
 /** How often clients report their position, and the server runs a match tick. */
 export const CLIENT_SEND_HZ = 15;
 export const SERVER_TICK_HZ = 20;
+
+/** How often each client measures its round trip to the server and reports it. */
+export const PING_INTERVAL_MS = 2000;
+/** Reported pings are clamped to this (ms), so a bad value can't show nonsense. */
+export const MAX_REPORTED_PING_MS = 9999;
 
 /** Seconds the server keeps a dropped player's seat open for them to reconnect. */
 export const RECONNECT_GRACE_SECONDS = 30;
@@ -74,6 +79,8 @@ export interface ClientMessages {
   /** Finished, host only: play the same level again, or go on to the next one. */
   restart: Record<string, never>;
   nextLevel: Record<string, never>;
+  /** Any time: this client's latest measured round trip to the server, in ms (shown to everyone). */
+  reportPing: { ms: number };
 }
 
 // --- Server → client -------------------------------------------------------------
@@ -95,7 +102,7 @@ export interface ServerMessages {
 
 /**
  * The state Colyseus keeps in sync on every client (binary patches). The server's
- * schema (server/src/rooms/QuestRoomState.ts) must match these shapes; it checks
+ * schema (src/rooms/QuestRoomState.ts in the server project) must match these shapes; it checks
  * that at compile time.
  */
 export interface SyncedPlayer {
@@ -107,6 +114,8 @@ export interface SyncedPlayer {
   z: number;
   facing: number;
   moveAmount: number;
+  /** Round trip to the server in ms, as last reported by this player; 0 = not measured yet. */
+  ping: number;
 }
 
 export interface SyncedRoomState {

@@ -1,4 +1,4 @@
-import type { ClientCommand, ClientMessages } from "@/net/protocol";
+import { type ClientCommand, type ClientMessages, MAX_REPORTED_PING_MS } from "@/net/protocol";
 
 /**
  * Clients can send anything, so every message is checked here before the room
@@ -15,6 +15,14 @@ export function parseMove(raw: unknown): ClientMessages["move"] | null {
     return null;
   }
   return { x: m.x, z: m.z, facing: m.facing, moveAmount: m.moveAmount, respawnSeq: m.respawnSeq };
+}
+
+/** A reported ping as a whole number of ms (at least 1, so 0 keeps meaning "not measured"). */
+export function parsePing(raw: unknown): number | null {
+  if (!raw || typeof raw !== "object") return null;
+  const ms = (raw as Record<string, unknown>).ms;
+  if (!isNumber(ms) || ms < 0) return null;
+  return Math.min(Math.max(Math.round(ms), 1), MAX_REPORTED_PING_MS);
 }
 
 export function parseClientCommand(raw: unknown): ClientCommand | null {
