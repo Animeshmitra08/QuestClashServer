@@ -20,7 +20,7 @@ import type { GameEvent, MatchState, PlayerId } from "@/types/state";
  * messages, rules or levels change in a way the other side must match; a client
  * with a different number is refused with a clear "update" message.
  */
-export const PROTOCOL_VERSION = 2;
+export const PROTOCOL_VERSION = 3;
 
 /** The Colyseus room type name. */
 export const ROOM_NAME = "quest";
@@ -42,6 +42,12 @@ export const MAX_REPORTED_PING_MS = 9999;
 /** Seconds the server keeps a dropped player's seat open for them to reconnect. */
 export const RECONNECT_GRACE_SECONDS = 30;
 
+/**
+ * "lobby": players join and get ready. "playing": a match is running; the room is
+ * locked (only dropped players can reconnect). "finished": the match ended; the room
+ * is open again, so players who left can rejoin with the code before the host starts
+ * the next match or goes back to the lobby. If the host leaves, the room closes for everyone.
+ */
 export type RoomPhase = "lobby" | "playing" | "finished";
 
 /** Options a client passes when creating a room. */
@@ -79,6 +85,8 @@ export interface ClientMessages {
   /** Finished, host only: play the same level again, or go on to the next one. */
   restart: Record<string, never>;
   nextLevel: Record<string, never>;
+  /** Finished, host only: end the match and take everyone back to the lobby to get ready again. */
+  backToLobby: Record<string, never>;
   /** Any time: this client's latest measured round trip to the server, in ms (shown to everyone). */
   reportPing: { ms: number };
 }
@@ -151,13 +159,14 @@ export const NET_ERRORS = {
   serverUnreachable: "Can't reach the game server. Check your connection and the server address.",
   connectionLost: "Connection to the game server was lost.",
   requestTimedOut: "The server didn't answer in time.",
+  hostLeft: "The host left, so the room was closed.",
 } as const;
 
 export type NetErrorCode = keyof typeof NET_ERRORS;
 
 /** Application close/join error codes in the range Colyseus reserves for apps (4011–4999). */
 export const APP_ERROR_CODES: Record<
-  "roomFull" | "matchInProgress" | "invalidName" | "invalidLevel" | "versionMismatch",
+  "roomFull" | "matchInProgress" | "invalidName" | "invalidLevel" | "versionMismatch" | "hostLeft",
   number
 > = {
   roomFull: 4101,
@@ -165,6 +174,8 @@ export const APP_ERROR_CODES: Record<
   invalidName: 4103,
   invalidLevel: 4104,
   versionMismatch: 4105,
+  /** Close code sent to everyone when the host leaves and the room shuts down. */
+  hostLeft: 4106,
 };
 
 /** A display name the server accepts: trimmed, 1–16 characters. */

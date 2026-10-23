@@ -54,6 +54,9 @@ interface ActiveMatch {
  * for single player. Clients send commands and their player's position; this
  * room validates both, applies the rules, and sends the results back.
  * Player ids are Colyseus session ids, which survive reconnection.
+ *
+ * The room is open in the lobby and again after a match ends (see RoomPhase), and
+ * it closes for everyone when the host leaves (or doesn't reconnect in time).
  */
 export class QuestRoom extends Room<{ state: QuestRoomState }> {
   /**
@@ -66,10 +69,12 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
 
   private level!: LevelDefinition;
   private match: ActiveMatch | null = null;
-  /** Join order, so slots and the host follow who arrived first. */
+  /** Join order, so the first to arrive is host and matches list players in arrival order. */
   private order: PlayerId[] = [];
   /** Goes up with every match started in this room, so clients can tell matches apart. */
   private matchNumber = 0;
+  /** Set when the host has left and the room is sending everyone away. */
+  private closing = false;
 
   messages = {
     ready: (client: Client, message: ClientMessages["ready"]) => {
@@ -134,6 +139,15 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
       this.startMatch(next);
     },
 
+    backToLobby: (client: Client) => {
+      if (client.sessionId !== this.state.hostId) return this.refuse(client, "notHost");
+      if (this.phase !== "finished") return this.refuse(client, "wrongPhase");
+      this.match?.unsubscribe();
+      this.match = null;
+      for (const player of this.state.players.values()) player.ready = false;
+      this.state.phase = "lobby"; // clients leave the match view when they see this
+    },
+
     reportPing: (client: Client, message: ClientMessages["reportPing"]) => {
       const ms = parsePing(message);
       const player = this.state.players.get(client.sessionId);
@@ -160,7 +174,8 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
       throw new ServerError(APP_ERROR_CODES.versionMismatch, NET_ERRORS.versionMismatch);
     }
     if (!cleanPlayerName(options?.name)) throw new ServerError(APP_ERROR_CODES.invalidName, NET_ERRORS.invalidName);
-    if (this.phase !== "lobby") throw new ServerError(APP_ERROR_CODES.matchInProgress, NET_ERRORS.matchInProgress);
+    // Joining is open in the lobby and again once a match has ended (players who left can come back).
+    if (this.phase === "playing") throw new ServerError(APP_ERROR_CODES.matchInProgress, NET_ERRORS.matchInProgress);
     // Counts players waiting to reconnect too: their seat is still theirs.
     if (this.state.players.size >= MAX_ROOM_PLAYERS) throw new ServerError(APP_ERROR_CODES.roomFull, NET_ERRORS.roomFull);
     return true;
@@ -177,6 +192,9 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
 
   /** The connection dropped without the player choosing to leave: keep their seat for a while. */
   async onDrop(client: Client) {
+    // Closing (host left): disconnect() calls this for everyone it sends away. There's
+    // no seat to keep, and allowReconnection() would reject, crashing the process.
+    if (this.closing) return;
     const player = this.state.players.get(client.sessionId);
     if (player) {
       player.connected = false;
@@ -202,7 +220,14 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
 
   /** Left for good: chose to leave, or didn't come back in time. */
   onLeave(client: Client) {
+    if (this.closing) return; // everyone is being sent away; nothing to tidy
     const id = client.sessionId;
+    if (id === this.state.hostId) {
+      // The host runs the room: without them it closes, and everyone else is told why.
+      this.closing = true;
+      void this.disconnect(APP_ERROR_CODES.hostLeft);
+      return;
+    }
     this.state.players.delete(id);
     this.order = this.order.filter((other) => other !== id);
     if (this.match) {
@@ -210,7 +235,6 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
       this.match.guards.delete(id);
       this.flush();
     }
-    if (this.state.hostId === id) this.state.hostId = this.order[0] ?? "";
     if (this.phase === "lobby") this.startIfEveryoneReady();
   }
 
@@ -313,7 +337,10 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
 
     this.state.matchTime += dt;
     const status = match.stage.getState().status;
-    if (status === "completed" || status === "failed") this.state.phase = "finished";
+    if (status === "completed" || status === "failed") {
+      this.state.phase = "finished";
+      void this.unlock(); // players who left can rejoin with the code until the next match starts
+    }
     this.flush();
   }
 
