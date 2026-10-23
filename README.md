@@ -7,7 +7,7 @@ It is a **standalone Node.js project**. It has no dependency on the Expo app's f
 ## What it does
 
 - **Rooms:** rooms of up to 5 players, each with a short code (for example `K7QPM`) that friends join with.
-- **Lobby:** players mark themselves ready, and the host picks the level. The match starts when every connected player is ready, and the room then locks to new players.
+- **Lobby:** players mark themselves ready, and the host picks the level. The match starts when every connected player is ready, and the room then refuses new players until it ends (dropped players can still reconnect).
 - **Authority:** the server decides items, puzzle answers, doors, traps, exits, score, objectives and stage progression (the host chooses replay or next level).
 - **Movement:** each client moves its own player and reports its position 15 times a second. The server checks every report against walking speed and the walls before using it, so a modified client can't teleport or walk through a closed door. Positions are synced to everyone with Colyseus state patches.
 - **Disconnects:** a dropped connection keeps its seat for 30 seconds, and the SDK reconnects automatically as the same player. A deliberate leave, or not returning in time, removes the player and puts their items back in the world.

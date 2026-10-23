@@ -110,7 +110,8 @@ describe("rooms, codes and the lobby", () => {
     await waitFor("playing", () => ana.state.phase === "playing" && bo.state.phase === "playing");
 
     const late = await refused(TestClient.join(URL, ana.code, "Late"));
-    assert.ok(late.code === APP_ERROR_CODES.matchInProgress || /locked/i.test(late.message), JSON.stringify(late));
+    // Its own code, not Colyseus's "locked" (522), which looks the same as a room that's gone.
+    assert.equal(late.code, APP_ERROR_CODES.matchInProgress, JSON.stringify(late));
   });
 
   it("holds at most five players", async () => {

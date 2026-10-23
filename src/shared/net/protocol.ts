@@ -43,8 +43,8 @@ export const MAX_REPORTED_PING_MS = 9999;
 export const RECONNECT_GRACE_SECONDS = 30;
 
 /**
- * "lobby": players join and get ready. "playing": a match is running; the room is
- * locked (only dropped players can reconnect). "finished": the match ended; the room
+ * "lobby": players join and get ready. "playing": a match is running; new joins are
+ * refused with "matchInProgress" (only dropped players can reconnect). "finished": the match ended; the room
  * is open again, so players who left can rejoin with the code before the host starts
  * the next match or goes back to the lobby. If the host leaves, the room closes for everyone.
  */

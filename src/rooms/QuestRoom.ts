@@ -304,8 +304,10 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
     this.match = match;
     this.matchNumber += 1;
     this.state.matchTime = 0;
+    // Nobody new joins mid-match: onAuth refuses with "matchInProgress" (reconnecting players
+    // still can). Not lock(): Colyseus refuses a locked room with the same code as a missing
+    // one, so the app couldn't tell "wait for the match to end" from "this room is gone".
     this.state.phase = "playing";
-    void this.lock(); // nobody new joins mid-match (reconnecting players still can)
     this.flush();
   }
 
@@ -338,8 +340,7 @@ export class QuestRoom extends Room<{ state: QuestRoomState }> {
     this.state.matchTime += dt;
     const status = match.stage.getState().status;
     if (status === "completed" || status === "failed") {
-      this.state.phase = "finished";
-      void this.unlock(); // players who left can rejoin with the code until the next match starts
+      this.state.phase = "finished"; // players who left can rejoin with the code until the next match starts
     }
     this.flush();
   }
