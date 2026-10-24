@@ -19,8 +19,17 @@ import { type JoinFailure, sleep, TestClient, waitFor } from "./support/TestClie
 const PORT = 2568;
 // 127.0.0.1, not localhost: Node resolves localhost to IPv6 first.
 const URL = `http://127.0.0.1:${PORT}`;
-const KEY_STAND = { x: 8.2, z: 12.3 };
-const DIAL_STAND = { x: 2.3, z: -1.2 };
+// Places in the temple woods within reach of the key and the dial, and obstacle-free
+// routes to them from the start (the woods are full of trees and rocks).
+const KEY_STAND = { x: 20.4, z: 22.4 };
+const KEY_STAND_2 = { x: 20.7, z: 21.8 };
+const TO_KEY = [
+  { x: 16.75, z: 25.25 },
+  { x: 18.75, z: 25.5 },
+  { x: 19.25, z: 25 },
+];
+const DIAL_STAND = { x: 5.5, z: -2.1 };
+const TO_DIAL = [{ x: 2, z: 1.5 }];
 
 let colyseus: ColyseusTestServer;
 const clients: TestClient[] = [];
@@ -142,7 +151,7 @@ describe("a two-player match", () => {
 
   it("synchronises movement: each client sees where the other walked", async () => {
     const { ana, bo } = await startTwoPlayerMatch();
-    const end = await ana.walk([{ x: 0, z: 7 }]);
+    const end = await ana.walk([{ x: 0, z: 22 }]);
     await waitFor("Bo sees Ana arrive", () => {
       const seen = bo.positionOf(ana.id);
       return seen !== null && Math.hypot(seen.x - end.x, seen.z - end.z) < 0.1;
@@ -152,7 +161,7 @@ describe("a two-player match", () => {
   it("the server, not the client, decides where a player can be: a teleport is clamped", async () => {
     const { ana } = await startTwoPlayerMatch();
     for (let i = 0; i < 5; i++) {
-      ana.move(0, -12.2); // straight to the exit, through the locked door
+      ana.move(0, -27); // straight to the exit, through the woods and the locked door
       await sleep(50);
     }
     const accepted = ana.positionOf(ana.id)!;
@@ -166,8 +175,8 @@ describe("a two-player match", () => {
     assert.deepEqual([far.accepted, !far.accepted && far.reason], [false, "outOfReach"]);
 
     await Promise.all([
-      ana.walk([{ x: 0, z: 12.3 }, KEY_STAND]),
-      bo.walk([{ x: 0.5, z: 12.4 }, { x: 7.6, z: 12.5 }]),
+      ana.walk([...TO_KEY, KEY_STAND]),
+      bo.walk([...TO_KEY, KEY_STAND_2]),
     ]);
     const [a, b] = await Promise.all([
       ana.command({ type: "collectItem", pickupId: TEMPLE_IDS.key }),
@@ -186,7 +195,7 @@ describe("a two-player match", () => {
 
   it("the server validates puzzle answers", async () => {
     const { ana, bo } = await startTwoPlayerMatch();
-    await ana.walk([{ x: 2.3, z: 8 }, DIAL_STAND]);
+    await ana.walk([...TO_DIAL, DIAL_STAND]);
     const answer = (optionIndex: number) =>
       ana.command({ type: "submitPuzzleAnswer", puzzleId: TEMPLE_IDS.sunPuzzle, optionIndex });
 

@@ -40,7 +40,20 @@ export interface PlayerState {
   time: number;
 }
 
-export type BlockKind = "wall" | "pillar" | "crate";
+/**
+ * What a solid block looks like. Every kind collides as its rectangle (`center`, `size`);
+ * the kind only changes the model drawn there.
+ *
+ * - Built stone and wood, drawn as boxes filling the rectangle: "wall", "pillar", "crate".
+ * - Nature, drawn as low-poly models:
+ *   - "tree" (round, leafy) and "pine": the rectangle is the trunk you bump into (about
+ *     0.8 × 0.8); the crown spreads wider overhead. `height` is the whole tree.
+ *   - "rock", "bush", "stump": the model fills the rectangle, `height` tall.
+ *   - "log": a fallen trunk lying along the rectangle's longer side; `height` is its thickness.
+ *   - "treeline": a dense band of trees filling the rectangle, for the edge of the map or a
+ *     thicket nobody can pass. `height` is the typical tree height.
+ */
+export type BlockKind = "wall" | "pillar" | "crate" | "tree" | "pine" | "rock" | "bush" | "log" | "stump" | "treeline";
 
 /** An axis-aligned rectangle on the floor plane. */
 export interface Rect {
@@ -104,7 +117,7 @@ interface InteractableBase {
   facing: number;
   /** How close (center to center) the player must be to use it. */
   reach: number;
-  /** Short verb shown next to the USE button, e.g. "Read". */
+  /** Short verb shown on the USE button while this is in reach (in capitals), e.g. "Read". Keep it to one or two short words. */
   prompt: string;
   /** Footprint size if the object is solid; omit for objects the player can walk over. */
   collider?: Vec2;
@@ -256,7 +269,13 @@ export interface LevelTheme {
   background: string;
   fog: { near: number; far: number };
   floorColor: string;
-  blockColors: Readonly<Record<BlockKind, string>>;
+  /** A second floor colour blended in soft patches (grass and bare earth, moss…). Omit for an even floor. */
+  floorAccent?: string;
+  /**
+   * Colour per block kind. Kinds left out use a natural default (green leaves, grey rock…).
+   * For trees, pines and treelines this is the colour of the leaves; trunks are always bark brown.
+   */
+  blockColors: Readonly<Partial<Record<BlockKind, string>>>;
   ambient: { sky: string; ground: string; intensity: number };
   sun: { color: string; intensity: number; position: readonly [number, number, number] };
 }

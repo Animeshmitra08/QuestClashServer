@@ -20,7 +20,7 @@ import type { GameEvent, MatchState, PlayerId } from "@/types/state";
  * messages, rules or levels change in a way the other side must match; a client
  * with a different number is refused with a clear "update" message.
  */
-export const PROTOCOL_VERSION = 3;
+export const PROTOCOL_VERSION = 4;
 
 /** The Colyseus room type name. */
 export const ROOM_NAME = "quest";

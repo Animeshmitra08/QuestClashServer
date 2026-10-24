@@ -40,7 +40,7 @@ interface GapWallOptions {
   height: number;
 }
 
-/** A wall across the room with an opening in the middle. */
+/** A wall across the room with an opening in the middle (centered on x = 0). */
 export function wallWithGap({ id, z, innerHalfWidth, gapHalfWidth, height }: GapWallOptions): LevelBlock[] {
   const pieceWidth = innerHalfWidth - gapHalfWidth;
   const pieceCenterX = gapHalfWidth + pieceWidth / 2;
@@ -60,4 +60,70 @@ export function pillar(id: string, x: number, z: number, size = 1.2, height = 3)
 
 export function crate(id: string, x: number, z: number, size = 1): LevelBlock {
   return { id, kind: "crate", center: { x, z }, size: { x: size, z: size }, height: size };
+}
+
+// --- Nature -----------------------------------------------------------------------------
+
+/** A round, leafy tree. You bump into the trunk (0.8 × 0.8); the crown spreads overhead. */
+export function tree(id: string, x: number, z: number, height = 4.5): LevelBlock {
+  return { id, kind: "tree", center: { x, z }, size: { x: 0.8, z: 0.8 }, height };
+}
+
+/** A tall pine. You bump into the trunk (0.7 × 0.7). */
+export function pine(id: string, x: number, z: number, height = 5.5): LevelBlock {
+  return { id, kind: "pine", center: { x, z }, size: { x: 0.7, z: 0.7 }, height };
+}
+
+export function rock(id: string, x: number, z: number, width = 1.4, depth = width, height = Math.max(width, depth) * 0.7): LevelBlock {
+  return { id, kind: "rock", center: { x, z }, size: { x: width, z: depth }, height };
+}
+
+export function bush(id: string, x: number, z: number, size = 1.3): LevelBlock {
+  return { id, kind: "bush", center: { x, z }, size: { x: size, z: size }, height: size * 0.75 };
+}
+
+/** A fallen trunk lying along x or z. */
+export function log(id: string, x: number, z: number, length = 3, along: "x" | "z" = "x", thickness = 0.6): LevelBlock {
+  const size = along === "x" ? { x: length, z: thickness } : { x: thickness, z: length };
+  return { id, kind: "log", center: { x, z }, size, height: thickness };
+}
+
+export function stump(id: string, x: number, z: number, size = 0.8): LevelBlock {
+  return { id, kind: "stump", center: { x, z }, size: { x: size, z: size }, height: 0.5 };
+}
+
+/** A dense band of trees filling the rectangle from (minX, minZ) to (maxX, maxZ): nobody gets through. */
+export function treeLine(id: string, minX: number, minZ: number, maxX: number, maxZ: number, height = 5): LevelBlock {
+  return {
+    id,
+    kind: "treeline",
+    center: { x: (minX + maxX) / 2, z: (minZ + maxZ) / 2 },
+    size: { x: maxX - minX, z: maxZ - minZ },
+    height,
+  };
+}
+
+interface ForestEdgeOptions {
+  /** Distance from the center to the outside edge of the forest (x), usually half the floor width. */
+  halfWidth: number;
+  /** Distance from the center to the outside edge of the forest (z), usually half the floor depth. */
+  halfDepth: number;
+  /** How deep the band of trees is. The playable area ends this far inside the edge. */
+  depth?: number;
+  height?: number;
+}
+
+/**
+ * The edge of an open map: four bands of trees, ids forest-north, forest-south,
+ * forest-west, forest-east. The south band (nearest the camera) is a little lower;
+ * trees between the camera and the player fade out anyway.
+ */
+export function forestEdge({ halfWidth, halfDepth, depth = 4, height = 5 }: ForestEdgeOptions): LevelBlock[] {
+  const innerX = halfWidth - depth;
+  return [
+    treeLine("forest-north", -halfWidth, -halfDepth, halfWidth, -halfDepth + depth, height),
+    treeLine("forest-south", -halfWidth, halfDepth - depth, halfWidth, halfDepth, height * 0.8),
+    treeLine("forest-west", -halfWidth, -halfDepth + depth, -innerX, halfDepth - depth, height),
+    treeLine("forest-east", innerX, -halfDepth + depth, halfWidth, halfDepth - depth, height),
+  ];
 }

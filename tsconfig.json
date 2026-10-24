@@ -10,6 +10,7 @@
     "noEmit": true,
     "isolatedModules": true,
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true, // levels can be JSON files (src/shared/levels/*.json)
     "paths": {
       // The game rules, levels and protocol live in src/shared/ (this project's own
       // copy; the server has no dependency on the app's folder).

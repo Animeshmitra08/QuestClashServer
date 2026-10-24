@@ -1,4 +1,21 @@
-import type { LevelDefinition, ObjectiveCondition } from "@/types/game";
+import type { BlockKind, LevelDefinition, ObjectiveCondition } from "@/types/game";
+
+import { circleOverlapsRect } from "./CollisionSystem";
+import { PLAYER_RADIUS } from "./MovementController";
+
+/** Every block kind (a Record, so TypeScript insists a new kind is added here too). */
+const BLOCK_KINDS: Record<BlockKind, true> = {
+  wall: true,
+  pillar: true,
+  crate: true,
+  tree: true,
+  pine: true,
+  rock: true,
+  bush: true,
+  log: true,
+  stump: true,
+  treeline: true,
+};
 
 const REQUIRED_LISTS = [
   "blocks",
@@ -76,6 +93,21 @@ export function validateLevel(level: LevelDefinition): string[] {
 
   if (!spawnIds.has(level.playerSpawnId)) {
     problems.push(`player spawn point "${level.playerSpawnId}" does not exist`);
+  }
+
+  for (const block of level.blocks) {
+    if (!(block.kind in BLOCK_KINDS)) {
+      problems.push(`block "${block.id}": unknown kind "${block.kind}" (expected ${Object.keys(BLOCK_KINDS).join(", ")})`);
+    }
+    if (!(block.size?.x > 0 && block.size?.z > 0 && block.height > 0)) {
+      problems.push(`block "${block.id}": size and height must be positive`);
+    }
+  }
+
+  // A player who appears inside a tree or rock is stuck there.
+  for (const spawn of level.spawnPoints) {
+    const blocking = level.blocks.find((block) => circleOverlapsRect(spawn.position, PLAYER_RADIUS, block));
+    if (blocking) problems.push(`spawn point "${spawn.id}" is inside block "${blocking.id}"`);
   }
 
   for (const item of level.interactables) {

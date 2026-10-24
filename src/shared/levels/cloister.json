@@ -1,0 +1,887 @@
+{
+  "id": "cloister-2",
+  "name": "Moonlit Cloister",
+  "description": "A moonlit pine forest, a sealed cloister and three and a half minutes on the clock.",
+  "floorSize": { "x": 60, "z": 64 },
+  "blocks": [
+    {
+      "id": "forest-north",
+      "kind": "treeline",
+      "center": { "x": 0, "z": -30 },
+      "size": { "x": 60, "z": 4 },
+      "height": 5.5
+    },
+    {
+      "id": "forest-south",
+      "kind": "treeline",
+      "center": { "x": 0, "z": 30 },
+      "size": { "x": 60, "z": 4 },
+      "height": 4.4
+    },
+    {
+      "id": "forest-west",
+      "kind": "treeline",
+      "center": { "x": -28, "z": 0 },
+      "size": { "x": 4, "z": 56 },
+      "height": 5.5
+    },
+    {
+      "id": "forest-east",
+      "kind": "treeline",
+      "center": { "x": 28, "z": 0 },
+      "size": { "x": 4, "z": 56 },
+      "height": 5.5
+    },
+    {
+      "id": "thicket-west",
+      "kind": "treeline",
+      "center": { "x": -15.5, "z": -6 },
+      "size": { "x": 21, "z": 4 },
+      "height": 5.5
+    },
+    {
+      "id": "thicket-east",
+      "kind": "treeline",
+      "center": { "x": 15.5, "z": -6 },
+      "size": { "x": 21, "z": 4 },
+      "height": 5.5
+    },
+    {
+      "id": "wall-inner-west",
+      "kind": "wall",
+      "center": { "x": -3.125, "z": -6 },
+      "size": { "x": 3.75, "z": 1 },
+      "height": 2.2
+    },
+    {
+      "id": "wall-inner-east",
+      "kind": "wall",
+      "center": { "x": 3.125, "z": -6 },
+      "size": { "x": 3.75, "z": 1 },
+      "height": 2.2
+    },
+    {
+      "id": "cloister-wall-west",
+      "kind": "wall",
+      "center": { "x": -10.5, "z": -18 },
+      "size": { "x": 1, "z": 20 },
+      "height": 2.4
+    },
+    {
+      "id": "cloister-wall-east",
+      "kind": "wall",
+      "center": { "x": 10.5, "z": -18 },
+      "size": { "x": 1, "z": 20 },
+      "height": 2.4
+    },
+    {
+      "id": "grove-west",
+      "kind": "treeline",
+      "center": { "x": -18.5, "z": -18 },
+      "size": { "x": 15, "z": 20 },
+      "height": 6
+    },
+    {
+      "id": "grove-east",
+      "kind": "treeline",
+      "center": { "x": 18.5, "z": -18 },
+      "size": { "x": 15, "z": 20 },
+      "height": 6
+    },
+    {
+      "id": "moon-shrine-back",
+      "kind": "wall",
+      "center": { "x": 0, "z": -27.5 },
+      "size": { "x": 7.4, "z": 1 },
+      "height": 3
+    },
+    {
+      "id": "moon-shrine-west",
+      "kind": "wall",
+      "center": { "x": -3.2, "z": -25.8 },
+      "size": { "x": 1, "z": 2.3999999999999986 },
+      "height": 2.6
+    },
+    {
+      "id": "moon-shrine-east",
+      "kind": "wall",
+      "center": { "x": 3.2, "z": -25.8 },
+      "size": { "x": 1, "z": 2.3999999999999986 },
+      "height": 2.6
+    },
+    {
+      "id": "arcade-sw",
+      "kind": "pillar",
+      "center": { "x": -8.5, "z": -10.2 },
+      "size": { "x": 1.2, "z": 1.2 },
+      "height": 3
+    },
+    {
+      "id": "arcade-se",
+      "kind": "pillar",
+      "center": { "x": 8.5, "z": -10.2 },
+      "size": { "x": 1.2, "z": 1.2 },
+      "height": 3
+    },
+    {
+      "id": "arcade-mid-w",
+      "kind": "pillar",
+      "center": { "x": -8.5, "z": -16 },
+      "size": { "x": 1.2, "z": 1.2 },
+      "height": 3
+    },
+    {
+      "id": "arcade-mid-e",
+      "kind": "pillar",
+      "center": { "x": 8.5, "z": -16 },
+      "size": { "x": 1.2, "z": 1.2 },
+      "height": 1.7
+    },
+    {
+      "id": "arcade-nw",
+      "kind": "pillar",
+      "center": { "x": -8.5, "z": -22.6 },
+      "size": { "x": 1.2, "z": 1.2 },
+      "height": 2.2
+    },
+    {
+      "id": "arcade-ne",
+      "kind": "pillar",
+      "center": { "x": 8.5, "z": -22.6 },
+      "size": { "x": 1.2, "z": 1.2 },
+      "height": 3
+    },
+    {
+      "id": "cloister-rubble-1",
+      "kind": "rock",
+      "center": { "x": 8.4, "z": -26.4 },
+      "size": { "x": 1.5, "z": 1.2 },
+      "height": 0.9
+    },
+    {
+      "id": "cloister-rubble-2",
+      "kind": "rock",
+      "center": { "x": -8.6, "z": -26.8 },
+      "size": { "x": 1.2, "z": 1.1 },
+      "height": 0.7
+    },
+    {
+      "id": "key-log-1",
+      "kind": "log",
+      "center": { "x": -19.6, "z": 13.6 },
+      "size": { "x": 3.6, "z": 0.6 },
+      "height": 0.6
+    },
+    {
+      "id": "key-rock",
+      "kind": "rock",
+      "center": { "x": -21.8, "z": 15.8 },
+      "size": { "x": 1.3, "z": 2.6 },
+      "height": 1.5
+    },
+    {
+      "id": "key-stump",
+      "kind": "stump",
+      "center": { "x": -17.6, "z": 13.9 },
+      "size": { "x": 0.8, "z": 0.8 },
+      "height": 0.5
+    },
+    {
+      "id": "key-bush",
+      "kind": "bush",
+      "center": { "x": -21.6, "z": 18.2 },
+      "size": { "x": 1.3, "z": 1.3 },
+      "height": 0.9750000000000001
+    },
+    {
+      "id": "tablet-boulder",
+      "kind": "rock",
+      "center": { "x": 21, "z": 3 },
+      "size": { "x": 1.4, "z": 2.8 },
+      "height": 2
+    },
+    {
+      "id": "wood-pine-1",
+      "kind": "pine",
+      "center": { "x": -13, "z": 13.8 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 6.1
+    },
+    {
+      "id": "wood-pine-2",
+      "kind": "pine",
+      "center": { "x": -17.2, "z": 20 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.6
+    },
+    {
+      "id": "wood-pine-3",
+      "kind": "pine",
+      "center": { "x": -6.6, "z": 6.1 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.7
+    },
+    {
+      "id": "wood-pine-4",
+      "kind": "pine",
+      "center": { "x": -15.5, "z": 1.7 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 4.9
+    },
+    {
+      "id": "wood-pine-5",
+      "kind": "pine",
+      "center": { "x": 20.6, "z": 13.8 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.8
+    },
+    {
+      "id": "wood-rock-1",
+      "kind": "rock",
+      "center": { "x": 23.3, "z": 15.9 },
+      "size": { "x": 1.4, "z": 1.1 },
+      "height": 0.7
+    },
+    {
+      "id": "wood-pine-6",
+      "kind": "pine",
+      "center": { "x": 13.4, "z": 8.3 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.5
+    },
+    {
+      "id": "wood-tree-1",
+      "kind": "tree",
+      "center": { "x": -18.3, "z": 24.4 },
+      "size": { "x": 0.8, "z": 0.8 },
+      "height": 4.3
+    },
+    {
+      "id": "wood-pine-7",
+      "kind": "pine",
+      "center": { "x": 6.6, "z": 7.4 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 4.7
+    },
+    {
+      "id": "wood-rock-2",
+      "kind": "rock",
+      "center": { "x": 23.2, "z": 26 },
+      "size": { "x": 1.4, "z": 1.1 },
+      "height": 0.8
+    },
+    {
+      "id": "wood-pine-8",
+      "kind": "pine",
+      "center": { "x": 11.2, "z": 13.7 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 6.1
+    },
+    {
+      "id": "wood-stump-1",
+      "kind": "stump",
+      "center": { "x": 7.1, "z": 19.3 },
+      "size": { "x": 0.8, "z": 0.8 },
+      "height": 0.5
+    },
+    {
+      "id": "wood-pine-9",
+      "kind": "pine",
+      "center": { "x": 22.2, "z": 22.1 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.9
+    },
+    {
+      "id": "wood-pine-10",
+      "kind": "pine",
+      "center": { "x": 0.3, "z": 14.2 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 4.9
+    },
+    {
+      "id": "wood-pine-11",
+      "kind": "pine",
+      "center": { "x": 14.8, "z": 22.7 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5
+    },
+    {
+      "id": "wood-rock-3",
+      "kind": "rock",
+      "center": { "x": -21, "z": 4.9 },
+      "size": { "x": 1.4, "z": 1.6 },
+      "height": 0.8
+    },
+    {
+      "id": "wood-pine-12",
+      "kind": "pine",
+      "center": { "x": -8.1, "z": 13.3 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.2
+    },
+    {
+      "id": "wood-log-1",
+      "kind": "log",
+      "center": { "x": 9.9, "z": 25 },
+      "size": { "x": 0.5, "z": 3.2 },
+      "height": 0.5
+    },
+    {
+      "id": "wood-rock-4",
+      "kind": "rock",
+      "center": { "x": -5.5, "z": 15.4 },
+      "size": { "x": 1.1, "z": 1 },
+      "height": 0.6
+    },
+    {
+      "id": "wood-rock-5",
+      "kind": "rock",
+      "center": { "x": 21.3, "z": 17.4 },
+      "size": { "x": 1.1, "z": 1.3 },
+      "height": 1
+    },
+    {
+      "id": "wood-log-2",
+      "kind": "log",
+      "center": { "x": 11, "z": -0.9 },
+      "size": { "x": 0.5, "z": 3 },
+      "height": 0.5
+    },
+    {
+      "id": "wood-pine-13",
+      "kind": "pine",
+      "center": { "x": -5.9, "z": 20.8 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 6
+    },
+    {
+      "id": "wood-pine-14",
+      "kind": "pine",
+      "center": { "x": -3.1, "z": 13.5 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 4.9
+    },
+    {
+      "id": "wood-bush-1",
+      "kind": "bush",
+      "center": { "x": -9.8, "z": 17.9 },
+      "size": { "x": 1.6, "z": 1.6 },
+      "height": 1.2000000000000002
+    },
+    {
+      "id": "wood-pine-15",
+      "kind": "pine",
+      "center": { "x": -10.9, "z": 22.3 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.9
+    },
+    {
+      "id": "wood-pine-16",
+      "kind": "pine",
+      "center": { "x": -20.3, "z": 0.6 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 6.6
+    },
+    {
+      "id": "wood-rock-6",
+      "kind": "rock",
+      "center": { "x": -23.5, "z": -1.6 },
+      "size": { "x": 1.5, "z": 1.5 },
+      "height": 0.8
+    },
+    {
+      "id": "wood-rock-7",
+      "kind": "rock",
+      "center": { "x": -17.2, "z": 5.8 },
+      "size": { "x": 1.4, "z": 1.6 },
+      "height": 0.9
+    },
+    {
+      "id": "wood-bush-2",
+      "kind": "bush",
+      "center": { "x": 10.1, "z": 17.8 },
+      "size": { "x": 1.2, "z": 1.2 },
+      "height": 0.8999999999999999
+    },
+    {
+      "id": "wood-pine-17",
+      "kind": "pine",
+      "center": { "x": 6.4, "z": -0.3 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.4
+    },
+    {
+      "id": "wood-stump-2",
+      "kind": "stump",
+      "center": { "x": -9.2, "z": 26.3 },
+      "size": { "x": 0.6, "z": 0.6 },
+      "height": 0.5
+    },
+    {
+      "id": "wood-bush-3",
+      "kind": "bush",
+      "center": { "x": 10.1, "z": 20 },
+      "size": { "x": 1.2, "z": 1.2 },
+      "height": 0.8999999999999999
+    },
+    {
+      "id": "wood-pine-18",
+      "kind": "pine",
+      "center": { "x": 15.9, "z": 19.3 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.8
+    },
+    {
+      "id": "wood-bush-4",
+      "kind": "bush",
+      "center": { "x": 5.8, "z": 15.1 },
+      "size": { "x": 1.5, "z": 1.5 },
+      "height": 1.125
+    },
+    {
+      "id": "wood-bush-5",
+      "kind": "bush",
+      "center": { "x": 8.7, "z": 16 },
+      "size": { "x": 1.1, "z": 1.1 },
+      "height": 0.8250000000000001
+    },
+    {
+      "id": "wood-pine-19",
+      "kind": "pine",
+      "center": { "x": 16.2, "z": 5.4 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5
+    },
+    {
+      "id": "wood-pine-20",
+      "kind": "pine",
+      "center": { "x": -12.7, "z": -0.7 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.4
+    },
+    {
+      "id": "wood-pine-21",
+      "kind": "pine",
+      "center": { "x": 13.1, "z": 2.2 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.2
+    },
+    {
+      "id": "wood-pine-22",
+      "kind": "pine",
+      "center": { "x": -22.5, "z": 9.3 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5
+    },
+    {
+      "id": "wood-rock-8",
+      "kind": "rock",
+      "center": { "x": 14.8, "z": 12.1 },
+      "size": { "x": 1.1, "z": 1.1 },
+      "height": 1
+    },
+    {
+      "id": "wood-bush-6",
+      "kind": "bush",
+      "center": { "x": 16, "z": -0.1 },
+      "size": { "x": 1.6, "z": 1.6 },
+      "height": 1.2000000000000002
+    },
+    {
+      "id": "wood-log-3",
+      "kind": "log",
+      "center": { "x": -16.1, "z": 9.4 },
+      "size": { "x": 0.6, "z": 3.4 },
+      "height": 0.6
+    },
+    {
+      "id": "wood-tree-2",
+      "kind": "tree",
+      "center": { "x": -21.4, "z": 21.6 },
+      "size": { "x": 0.8, "z": 0.8 },
+      "height": 4.3
+    },
+    {
+      "id": "wood-rock-9",
+      "kind": "rock",
+      "center": { "x": -13.7, "z": 6.4 },
+      "size": { "x": 1, "z": 0.8 },
+      "height": 0.8
+    },
+    {
+      "id": "wood-rock-10",
+      "kind": "rock",
+      "center": { "x": 22.7, "z": 10.7 },
+      "size": { "x": 1.4, "z": 1.4 },
+      "height": 0.6
+    },
+    {
+      "id": "wood-pine-23",
+      "kind": "pine",
+      "center": { "x": -6.3, "z": 0.1 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.5
+    },
+    {
+      "id": "wood-pine-24",
+      "kind": "pine",
+      "center": { "x": 3, "z": 0.7 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 4.8
+    },
+    {
+      "id": "wood-pine-25",
+      "kind": "pine",
+      "center": { "x": 14.8, "z": 15.9 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.3
+    },
+    {
+      "id": "wood-pine-26",
+      "kind": "pine",
+      "center": { "x": 8.6, "z": 10.7 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5
+    },
+    {
+      "id": "wood-pine-27",
+      "kind": "pine",
+      "center": { "x": -12, "z": 9.8 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 6
+    },
+    {
+      "id": "wood-pine-28",
+      "kind": "pine",
+      "center": { "x": 4.4, "z": 4.5 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5
+    },
+    {
+      "id": "wood-pine-29",
+      "kind": "pine",
+      "center": { "x": -11.5, "z": 3.6 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.2
+    },
+    {
+      "id": "wood-bush-7",
+      "kind": "bush",
+      "center": { "x": -13.7, "z": 20.1 },
+      "size": { "x": 1.1, "z": 1.1 },
+      "height": 0.8250000000000001
+    },
+    {
+      "id": "wood-rock-11",
+      "kind": "rock",
+      "center": { "x": -23.6, "z": 26.1 },
+      "size": { "x": 1.1, "z": 1.2 },
+      "height": 0.9
+    },
+    {
+      "id": "wood-pine-30",
+      "kind": "pine",
+      "center": { "x": -4.9, "z": 9.8 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 6.3
+    },
+    {
+      "id": "wood-log-4",
+      "kind": "log",
+      "center": { "x": 19, "z": 9.6 },
+      "size": { "x": 0.5, "z": 3.7 },
+      "height": 0.5
+    },
+    {
+      "id": "wood-pine-31",
+      "kind": "pine",
+      "center": { "x": -14.6, "z": 24.8 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.3
+    },
+    {
+      "id": "wood-pine-32",
+      "kind": "pine",
+      "center": { "x": 22.8, "z": -0.9 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 6.3
+    },
+    {
+      "id": "wood-pine-33",
+      "kind": "pine",
+      "center": { "x": 9.8, "z": 4.2 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 4.8
+    },
+    {
+      "id": "wood-pine-34",
+      "kind": "pine",
+      "center": { "x": 18.5, "z": 21.7 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5
+    },
+    {
+      "id": "wood-stump-3",
+      "kind": "stump",
+      "center": { "x": -24.3, "z": 4.3 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 0.5
+    },
+    {
+      "id": "wood-bush-8",
+      "kind": "bush",
+      "center": { "x": 5.5, "z": 22.7 },
+      "size": { "x": 1.5, "z": 1.5 },
+      "height": 1.125
+    },
+    {
+      "id": "wood-tree-3",
+      "kind": "tree",
+      "center": { "x": -2.7, "z": 17.7 },
+      "size": { "x": 0.8, "z": 0.8 },
+      "height": 4.2
+    },
+    {
+      "id": "wood-pine-35",
+      "kind": "pine",
+      "center": { "x": 17.9, "z": 25.6 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 5.5
+    },
+    {
+      "id": "wood-rock-12",
+      "kind": "rock",
+      "center": { "x": -15, "z": 17.3 },
+      "size": { "x": 0.9, "z": 0.9 },
+      "height": 0.6
+    },
+    {
+      "id": "wood-bush-9",
+      "kind": "bush",
+      "center": { "x": -7.8, "z": 8.7 },
+      "size": { "x": 1, "z": 1 },
+      "height": 0.75
+    },
+    {
+      "id": "wood-rock-13",
+      "kind": "rock",
+      "center": { "x": 7.7, "z": 22.2 },
+      "size": { "x": 1, "z": 0.9 },
+      "height": 1
+    },
+    {
+      "id": "wood-pine-36",
+      "kind": "pine",
+      "center": { "x": -6.1, "z": 25.2 },
+      "size": { "x": 0.7, "z": 0.7 },
+      "height": 4.8
+    },
+    {
+      "id": "wood-bush-10",
+      "kind": "bush",
+      "center": { "x": -8.2, "z": 3.2 },
+      "size": { "x": 1.6, "z": 1.6 },
+      "height": 1.2000000000000002
+    },
+    {
+      "id": "wood-rock-14",
+      "kind": "rock",
+      "center": { "x": 4.5, "z": 26 },
+      "size": { "x": 2.1, "z": 1.9 },
+      "height": 1.6
+    },
+    {
+      "id": "wood-rock-15",
+      "kind": "rock",
+      "center": { "x": -21.2, "z": 26.5 },
+      "size": { "x": 1.2, "z": 1 },
+      "height": 0.8
+    },
+    {
+      "id": "wood-stump-4",
+      "kind": "stump",
+      "center": { "x": 14.1, "z": 25.1 },
+      "size": { "x": 0.6, "z": 0.6 },
+      "height": 0.5
+    },
+    {
+      "id": "wood-rock-16",
+      "kind": "rock",
+      "center": { "x": -11.8, "z": 25.7 },
+      "size": { "x": 1.3, "z": 1.3 },
+      "height": 1
+    },
+    {
+      "id": "wood-rock-17",
+      "kind": "rock",
+      "center": { "x": 16.4, "z": 13.5 },
+      "size": { "x": 1.1, "z": 0.9 },
+      "height": 0.8
+    },
+    {
+      "id": "wood-rock-18",
+      "kind": "rock",
+      "center": { "x": -9.3, "z": 6.8 },
+      "size": { "x": 1, "z": 1 },
+      "height": 0.9
+    }
+  ],
+  "theme": {
+    "background": "#0e1420",
+    "fog": { "near": 16, "far": 40 },
+    "floorColor": "#2b3b32",
+    "floorAccent": "#3b3a33",
+    "blockColors": {
+      "wall": "#6b7385",
+      "pillar": "#5a6274",
+      "crate": "#4a3a2a",
+      "tree": "#2f5a4a",
+      "pine": "#25493d",
+      "rock": "#5d6470",
+      "bush": "#2f5a48",
+      "log": "#4a3a2c",
+      "stump": "#56432f"
+    },
+    "ambient": { "sky": "#c8d6ff", "ground": "#141a22", "intensity": 1 },
+    "sun": { "color": "#b8c8ff", "intensity": 1.6, "position": [-5, 12, 6] }
+  },
+  "spawnPoints": [
+    { "id": "start", "position": { "x": 0, "z": 23 }, "facing": 3.141592653589793 },
+    { "id": "gate-checkpoint", "position": { "x": 0, "z": -9.6 }, "facing": 3.141592653589793 }
+  ],
+  "playerSpawnId": "start",
+  "interactables": [
+    {
+      "id": "moon-key",
+      "kind": "pickup",
+      "position": { "x": -19.8, "z": 15.6 },
+      "facing": 0,
+      "reach": 1.2,
+      "prompt": "Pick up",
+      "item": { "id": "silver-key", "name": "Silver Key" }
+    },
+    {
+      "id": "moon-tablet",
+      "kind": "inspect",
+      "position": { "x": 19.9, "z": 3 },
+      "facing": -1.5707963267948966,
+      "reach": 1.6,
+      "collider": { "x": 0.5, "z": 1.1 },
+      "prompt": "Read",
+      "title": "Moonlit Tablet",
+      "message": "Two pale moons keep watch over the cloister.\nSpeak their number at the altar."
+    },
+    {
+      "id": "cloister-gate",
+      "kind": "door",
+      "position": { "x": 0, "z": -6 },
+      "facing": 0,
+      "reach": 1.8,
+      "collider": { "x": 2.5, "z": 0.6 },
+      "prompt": "Open",
+      "width": 2.5,
+      "height": 2.2,
+      "requirements": [
+        {
+          "kind": "item",
+          "itemId": "silver-key",
+          "consume": true,
+          "blockedMessage": {
+            "title": "Cloister Gate",
+            "message": "An iron gate with a silver lock. Somewhere in these woods is its key."
+          }
+        }
+      ]
+    },
+    {
+      "id": "moon-altar",
+      "kind": "puzzle",
+      "position": { "x": -5.5, "z": -16 },
+      "facing": 0,
+      "reach": 1.5,
+      "collider": { "x": 0.9, "z": 0.9 },
+      "prompt": "Inspect",
+      "puzzleId": "moon-puzzle",
+      "solvedMessage": {
+        "title": "The Moon Altar",
+        "message": "The altar glows softly. The moon gate is open."
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "id": "spikes-near",
+      "kind": "trap",
+      "center": { "x": 0, "z": -12.6 },
+      "size": { "x": 20, "z": 1.6 },
+      "timing": { "hidden": 1.2, "warning": 0.4, "rising": 0.1, "armed": 0.8, "retracting": 0.3 },
+      "respawnPointId": "gate-checkpoint",
+      "hitMessage": "Spikes! Back to the gate."
+    },
+    {
+      "id": "spikes-far",
+      "kind": "trap",
+      "center": { "x": 0, "z": -19.4 },
+      "size": { "x": 20, "z": 1.6 },
+      "timing": { "hidden": 1.2, "warning": 0.4, "rising": 0.1, "armed": 0.8, "retracting": 0.3 },
+      "startOffset": 1.4,
+      "respawnPointId": "gate-checkpoint",
+      "hitMessage": "Spikes! Back to the gate."
+    },
+    {
+      "id": "moon-gate",
+      "kind": "exit",
+      "center": { "x": 0, "z": -25.6 },
+      "size": { "x": 2.5, "z": 1.4 },
+      "requires": { "kind": "puzzleSolved", "puzzleId": "moon-puzzle" },
+      "lockedMessage": "The moon gate is sealed. Answer the altar first."
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "moon-puzzle",
+      "title": "The Moon Altar",
+      "question": "Silver moons are carved around the altar's rim. How many should glow?",
+      "options": ["One", "Two", "Three"],
+      "correctOptionIndex": 1,
+      "wrongAnswerHint": "The light fades. The tablet in the eastern woods may help.",
+      "solvedNotice": "The moon gate shimmers open!"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "find-key",
+      "text": "Find the silver key in the woods",
+      "completeWhen": { "kind": "pickupCollected", "pickupId": "moon-key" }
+    },
+    {
+      "id": "read-clue",
+      "text": "Learn how many moons to light",
+      "completeWhen": {
+        "kind": "any",
+        "of": [
+          { "kind": "inspected", "interactableId": "moon-tablet" },
+          { "kind": "puzzleSolved", "puzzleId": "moon-puzzle" }
+        ]
+      }
+    },
+    {
+      "id": "open-gate",
+      "text": "Unlock the cloister gate",
+      "completeWhen": { "kind": "doorOpened", "doorId": "cloister-gate" }
+    },
+    {
+      "id": "answer-altar",
+      "text": "Answer the moon altar",
+      "completeWhen": { "kind": "puzzleSolved", "puzzleId": "moon-puzzle" }
+    },
+    {
+      "id": "escape",
+      "text": "Reach the moon gate before time runs out",
+      "completeWhen": { "kind": "levelCompleted" }
+    }
+  ],
+  "timeLimitSeconds": 210,
+  "scoring": { "parTimeSeconds": 150, "starThresholds": [500, 800, 1000] },
+  "nextLevelId": null
+}
